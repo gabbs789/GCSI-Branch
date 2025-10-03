@@ -5,19 +5,21 @@ let biblioteca = [
 ]
 
 const getLivros = (req, res) => {
-  res.json(biblioteca) 
+  res.json(livros) 
 }
 
 const createLivro = (req, res) => {
-  const { id, titulo, quantidade } = req.body 
-  biblioteca.push({ id: Number(id), titulo, quantidade }) 
+  const { id, titulo, quantidade } = req.body
+  biblioteca.push({ id: id, titulo, quantidade: quantidadeTotal }) 
+  
   res.status(201).json({ message: 'Livro adicionado com sucesso!' })
 }
 
 const updateLivro = (req, res) => {
-  const { id } = req.params 
+  const { id } = req.params
   const { titulo, quantidade } = req.body
-  const livro = biblioteca.find(l => l.id === Number(id)) 
+  const livro = biblioteca.find(l => l.codigo === Number(id)) 
+  
 
   if (livro) {
     livro.titulo = titulo
